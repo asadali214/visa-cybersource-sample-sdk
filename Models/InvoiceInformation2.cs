@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json.Serialization;
+using CyberSourceMergedSpec.Core.Converters;
 using CyberSourceMergedSpec.Core.Models;
 
 namespace CyberSourceMergedSpec.Models;
@@ -11,6 +12,7 @@ public record InvoiceInformation2
     /// Format: <c>YYYY-MM-DD</c>, where <c>YYYY</c> = year, <c>MM</c> = month, and <c>DD</c> = day
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(DateOnlyDateTimeOffsetConverter))]
     [JsonPropertyName("dueDate")]
     public DateTimeOffset? DueDate { get; init; }
 
@@ -21,6 +23,7 @@ public record InvoiceInformation2
     /// </para>
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(DateOnlyDateTimeOffsetConverter))]
     [JsonPropertyName("expirationDate")]
     public DateTimeOffset? ExpirationDate { get; init; }
 

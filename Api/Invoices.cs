@@ -116,7 +116,7 @@ public sealed class Invoices
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
-            EmptyBody.Instance,
+            JsonRequest.Create(new { }),
             JsonResponse.Create<InvoicingV2InvoicesCancel200Response>(),
             PerformCancelActionErrorResponse.Instance,
             [],
@@ -139,7 +139,7 @@ public sealed class Invoices
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
-            EmptyBody.Instance,
+            JsonRequest.Create(new { }),
             JsonResponse.Create<InvoicingV2InvoicesPublish200Response>(),
             PerformPublishActionErrorResponse.Instance,
             [],
@@ -162,7 +162,7 @@ public sealed class Invoices
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
-            EmptyBody.Instance,
+            JsonRequest.Create(new { }),
             JsonResponse.Create<InvoicingV2InvoicesSend200Response>(),
             PerformSendActionErrorResponse.Instance,
             [],
@@ -173,11 +173,13 @@ public sealed class Invoices
     /// You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
     /// </summary>
     /// <param name="id">The invoice number.</param>
+    /// <param name="updateInvoiceRequest"></param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
     /// <param name="ct">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="InvoicingV2InvoicesPut200Response"/> instance.</returns>
     /// <exception cref="SdkException{TResult}"> of <see cref="UpdateInvoiceError"/> when the server returns an error response.</exception>
     public Task<InvoicingV2InvoicesPut200Response> UpdateInvoice(string id,
+        UpdateInvoiceRequest updateInvoiceRequest,
         RequestOptions? requestOptions = null,
         CancellationToken ct = default) =>
         _rawClient.Execute(_server.Default("/invoicing/v2/invoices/{id}"),
@@ -185,7 +187,7 @@ public sealed class Invoices
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Put,
-            EmptyBody.Instance,
+            JsonRequest.Create(updateInvoiceRequest),
             JsonResponse.Create<InvoicingV2InvoicesPut200Response>(),
             UpdateInvoiceErrorResponse.Instance,
             [],

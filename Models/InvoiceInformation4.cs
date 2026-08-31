@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using CyberSourceMergedSpec.Core.Converters;
 using CyberSourceMergedSpec.Core.Models;
 
 namespace CyberSourceMergedSpec.Models;
@@ -21,6 +22,7 @@ public record InvoiceInformation4
     /// The invoice due date. This field is required for creating an invoice.
     /// Format: <c>YYYY-MM-DD</c>, where <c>YYYY</c> = year, <c>MM</c> = month, and <c>DD</c> = day
     /// </summary>
+    [JsonConverter(typeof(DateOnlyDateTimeOffsetConverter))]
     [JsonPropertyName("dueDate")]
     public required DateTimeOffset DueDate { get; init; }
 
@@ -31,6 +33,7 @@ public record InvoiceInformation4
     /// </para>
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(DateOnlyDateTimeOffsetConverter))]
     [JsonPropertyName("expirationDate")]
     public DateTimeOffset? ExpirationDate { get; init; }
 
