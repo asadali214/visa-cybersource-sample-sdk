@@ -1,0 +1,20 @@
+<!-- Generated file — do not edit; regenerated with the SDK. -->
+
+# Credit — operations
+
+Accessor: `client.Credit` · Source: `Api/Credit.cs` · 1 operation
+
+**Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
+
+### CreateCredit
+
+- **Signature**: `CreateCredit(CreateCreditRequest createCreditRequest, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Returns**: `void` (Task)
+- **Error**: `SdkException<CreateCreditError>` — **Case A (typed)**
+- **Error accessors**: `TryGetNoContent(out RawError)` [400, 502] · `TryGetRawError(out RawError)` [fallback]
+
+| Type | Source |
+| --- | --- |
+| `CreateCreditRequest` | `Models/CreateCreditRequest.cs` |
+| `CreateCreditError` | `Errors/CreateCreditError.cs` |
+

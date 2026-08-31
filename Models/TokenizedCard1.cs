@@ -1,0 +1,280 @@
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using CyberSourceMergedSpec.Core.Models;
+
+namespace CyberSourceMergedSpec.Models;
+
+public record TokenizedCard1
+{
+    /// <summary>
+    /// First six digits of token. CyberSource includes this field in the reply message when it decrypts the payment
+    /// blob for the tokenized transaction.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("prefix")]
+    [MaxLength(6)]
+    public string? Prefix { get; init; }
+
+    /// <summary>
+    /// Last four digits of token. CyberSource includes this field in the reply message when it decrypts the payment
+    /// blob for the tokenized transaction.
+    /// <para>
+    /// For details, see <c>token_suffix</c> field description in [Google Pay Using the SCMP API.]
+    /// (https://apps.cybersource.com/library/documentation/dev_guides/Google_Pay_SCMP_API/html/)
+    /// </para>
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("suffix")]
+    [MaxLength(4)]
+    public string? Suffix { get; init; }
+
+    /// <summary>
+    /// Three-digit value that indicates the card type.
+    /// <para>
+    /// <b>IMPORTANT</b> It is strongly recommended that you include the card type field in request messages even if it is
+    /// optional for your processor and card type. Omitting the card type can cause the transaction to be processed with the wrong card type.
+    /// </para>
+    /// <para>
+    /// Possible values:
+    /// - <c>001</c>: Visa. Use card type value <c>001</c> for Visa Electron.
+    /// - <c>002</c>: Mastercard, Eurocard[^1], which is a European regional brand of Mastercard.
+    /// - <c>003</c>: American Express
+    /// - <c>004</c>: Discover
+    /// - <c>005</c>: Diners Club
+    /// - <c>006</c>: Carte Blanche[^1]
+    /// - <c>007</c>: JCB[^1]
+    /// - <c>008</c>: Optima
+    /// - <c>009</c>: GE Private Label
+    /// - <c>010</c>: Beneficial Private Label
+    /// - <c>011</c>: Twinpay Credit Card
+    /// - <c>012</c>: Twinpay Debit Card
+    /// - <c>013</c>: WalMart
+    /// - <c>014</c>: Enroute[^1]
+    /// - <c>015</c>: Lowe's Consumer
+    /// - <c>016</c>: Home Depot Consumer
+    /// - <c>017</c>: MBNA
+    /// - <c>018</c>: Dick's Sportswear
+    /// - <c>019</c>: Casual Corner
+    /// - <c>020</c>: Sears
+    /// - <c>021</c>: JAL[^1]
+    /// - <c>023</c>: Disney Card
+    /// - <c>024</c>: Maestro (UK Domestic)[^1]
+    /// - <c>025</c>: Sam's Club Consumer
+    /// - <c>026</c>: Sam's Club Business
+    /// - <c>027</c>: Nico's
+    /// - <c>028</c>: Paymentech Bill Me Later
+    /// - <c>029</c>: Bebe
+    /// - <c>030</c>: Restoration Hardware
+    /// - <c>031</c>: Delta Online
+    /// - <c>032</c>: Solo
+    /// - <c>033</c>: Visa Electron[^1]. Do not use this value. Use <c>001</c> for all Visa card types.
+    /// - <c>034</c>: Dankort[^1]
+    /// - <c>035</c>: Laser
+    /// - <c>036</c>: Cartes Bancaires[^1,4]
+    /// - <c>037</c>: Carta Si[^1]
+    /// - <c>038</c>: Pinless Debit
+    /// - <c>039</c>: Encoded account number[^1]
+    /// - <c>040</c>: UATP[^1]
+    /// - <c>041</c>: HOUSEHOLD
+    /// - <c>042</c>: Maestro (International)[^1]
+    /// - <c>043</c>: GE MONEY
+    /// - <c>044</c>: Korean Cards
+    /// - <c>045</c>: Style Cards
+    /// - <c>046</c>: JCrew
+    /// - <c>047</c>: Payeasecn eWallet
+    /// - <c>048</c>: Payeasecn Bank Transfer
+    /// - <c>049</c>: Meijer
+    /// - <c>050</c>: Hipercard[^2,3]
+    /// - <c>051</c>: Aura
+    /// - <c>052</c>: Redecard
+    /// - <c>053</c>: Orico card
+    /// - <c>054</c>: Elo[^3]
+    /// - <c>055</c>: Capitol One Private Label
+    /// - <c>056</c>: Carnet
+    /// - <c>057</c>: Costco Private Label
+    /// - <c>058</c>: Carnet
+    /// - <c>059</c>: ValueLink
+    /// - <c>060</c>: MADA
+    /// - <c>061</c>: RuPay
+    /// - <c>062</c>: China UnionPay
+    /// - <c>063</c>: Falabella Private Label
+    /// - <c>064</c>: Prompt Card
+    /// - <c>065</c>: Korean Domestic
+    /// - <c>066</c>: Banricompras
+    /// - <c>067</c>: MEEZA
+    /// - <c>068</c>: PayPak
+    /// - <c>070</c>: EFTPOS
+    /// - <c>071</c>: Codensa
+    /// - <c>072</c>: Olimpica
+    /// - <c>073</c>: Colsubsidio
+    /// - <c>074</c>: Tuya
+    /// - <c>075</c>: Sodexo
+    /// - <c>076</c>: Naranja
+    /// - <c>077</c>: Cabal
+    /// - <c>078</c>: DINELCO
+    /// - <c>079</c>: PANAL
+    /// - <c>080</c>: EPM
+    /// - <c>081</c>: Jaywan
+    /// </para>
+    /// <para>
+    /// [^1]: For this card type, you must include the <c>paymentInformation.card.type</c> or <c>paymentInformation.tokenizedCard.type</c> field in your request for an authorization or a stand-alone credit.
+    /// [^2]: For this card type on Cielo 3.0, you must include the <c>paymentInformation.card.type</c> or <c>paymentInformation.tokenizedCard.type</c> field in a request for an authorization or a stand-alone credit. This card type is not supported on Cielo 1.5.
+    /// [^3]: For this card type on Getnet and Rede, you must include the <c>paymentInformation.card.type</c> or <c>paymentInformation.tokenizedCard.type</c> field in a request for an authorization or a stand-alone credit.
+    /// [^4]: For this card type, you must include the <c>paymentInformation.card.type</c> in your request for any payer authentication services.
+    /// </para>
+    /// <para>
+    /// #### Used by
+    /// <b>Authorization</b>
+    /// Required for Carte Blanche and JCB.
+    /// Optional for all other card types.
+    /// </para>
+    /// <para>
+    /// #### Card Present reply
+    /// This field is included in the reply message when the client software that is installed on the POS terminal uses
+    /// the token management service (TMS) to retrieve tokenized payment details. You must contact customer support to
+    /// have your account enabled to receive these fields in the credit reply message.
+    /// </para>
+    /// <para>
+    /// Returned by the Credit service.
+    /// </para>
+    /// <para>
+    /// This reply field is only supported by the following processors:
+    /// - American Express Direct
+    /// - Credit Mutuel-CIC
+    /// - FDC Nashville Global
+    /// - OmniPay Direct
+    /// - SIX
+    /// </para>
+    /// <para>
+    /// #### Google Pay transactions
+    /// For PAN-based Google Pay transactions, this field is returned in the API response.
+    /// </para>
+    /// <para>
+    /// #### GPX
+    /// This field only supports transactions from the following card types:
+    /// - Visa
+    /// - Mastercard
+    /// - AMEX
+    /// - Discover
+    /// - Diners
+    /// - JCB
+    /// - Union Pay International
+    /// </para>
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("type")]
+    public string? Type { get; init; }
+
+    /// <summary>
+    /// Confidence level of the tokenization. This value is assigned by the token service provider.
+    /// <para>
+    /// <b>Note</b> This field is supported only for <b>CyberSource through VisaNet</b> and <b>FDC Nashville Global</b>.
+    /// </para>
+    /// <para>
+    /// Returned by PIN debit credit or PIN debit purchase.
+    /// </para>
+    /// <para>
+    /// <b>Note</b> Merchants supported for <b>CyberSource through VisaNet</b>/<b>Visa Platform Connect</b> are advised not to use this field.
+    /// </para>
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("assuranceLevel")]
+    [MaxLength(2)]
+    public string? AssuranceLevel { get; init; }
+
+    /// <summary>
+    /// One of two possible meanings:
+    /// - The two-digit month in which a token expires.
+    /// - The two-digit month in which a card expires.
+    /// Format: <c>MM</c>
+    /// Possible values: <c>01</c> through <c>12</c>
+    /// <para>
+    /// <b>NOTE</b> The meaning of this field is dependent on the payment processor that is returning the value in an authorization reply. Please see the processor-specific details below.
+    /// </para>
+    /// <para>
+    /// #### Barclays and Streamline
+    /// For Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (<c>01</c> through <c>12</c>) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.
+    /// </para>
+    /// <para>
+    /// #### Encoded Account Numbers
+    /// For encoded account numbers (<c>card_type=039</c>), if there is no expiration date on the card, use <c>12</c>.\
+    /// <b>Important</b> It is your responsibility to determine whether a field is required for the transaction you are requesting.
+    /// </para>
+    /// <para>
+    /// #### Samsung Pay and Apple Pay
+    /// Month in which the token expires. CyberSource includes this field in the reply message when it decrypts the payment blob for the tokenized transaction.
+    /// </para>
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("expirationMonth")]
+    [MaxLength(2)]
+    public string? ExpirationMonth { get; init; }
+
+    /// <summary>
+    /// One of two possible meanings:
+    /// - The four-digit year in which a token expires.
+    /// - The four-digit year in which a card expires.
+    /// Format: <c>YYYY</c>
+    /// Possible values: <c>1900</c> through <c>3000</c>
+    /// Data type: Non-negative integer
+    /// <para>
+    /// <b>NOTE</b> The meaning of this field is dependent on the payment processor that is returning the value in an authorization reply. Please see the processor-specific details below.
+    /// </para>
+    /// <para>
+    /// #### Barclays and Streamline
+    /// For Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (1900 through
+    /// 3000) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.
+    /// </para>
+    /// <para>
+    /// #### Encoded Account Numbers
+    /// For encoded account numbers (<c>card_ type=039</c>), if there is no expiration date on the card, use <c>2021</c>.
+    /// </para>
+    /// <para>
+    /// #### FDC Nashville Global and FDMS South
+    /// You can send in 2 digits or 4 digits. When you send in 2 digits, they must be the last 2 digits of
+    /// the year.
+    /// </para>
+    /// <para>
+    /// #### Samsung Pay and Apple Pay
+    /// Year in which the token expires. CyberSource includes this field in the reply message when it decrypts the payment blob for the tokenized transaction.
+    /// </para>
+    /// <para>
+    /// <b>Important</b> It is your responsibility to determine whether a field is required for the transaction
+    /// you are requesting.
+    /// </para>
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("expirationYear")]
+    [MaxLength(4)]
+    public string? ExpirationYear { get; init; }
+
+    /// <summary>
+    /// Value that identifies your business and indicates that the cardholder’s account number is tokenized. This value
+    /// is assigned by the token service provider and is unique within the token service provider’s database.
+    /// <para>
+    /// <b>Note</b> This field is supported only for <b>CyberSource through VisaNet</b> and <b>FDC Nashville Global</b>.
+    /// </para>
+    /// <para>
+    /// #### PIN debit
+    /// Optional field for PIN debit credit or PIN debit purchase transactions that use payment network tokens; otherwise, not used.
+    /// </para>
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("requestorId")]
+    [MaxLength(11)]
+    public string? RequestorId { get; init; }
+
+    /// <summary>
+    /// Confidence level of the tokenization. This value is assigned by the token service provider.
+    /// <para>
+    /// <b>Note</b> This field is supported only for <b>Visa Platform Connect</b>
+    /// </para>
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("assuranceMethod")]
+    [MaxLength(2)]
+    public string? AssuranceMethod { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
+}

@@ -1,0 +1,16 @@
+<!-- Generated file — do not edit; regenerated with the SDK. -->
+
+# ChargebackDetails — operations
+
+Accessor: `client.ChargebackDetails` · Source: `Api/ChargebackDetails.cs` · 1 operation
+
+**Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
+
+### GetChargebackDetails
+
+- **Signature**: `GetChargebackDetails(DateTimeOffset startTime, DateTimeOffset endTime, string? organizationId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+  - `organizationId` — nullable, no default → **must pass explicitly**
+- **Query params (wire ← C#)**: `startTime` ← `startTime`, `endTime` ← `endTime`, `organizationId` ← `organizationId`
+- **Returns**: `void` (Task)
+- **Error**: `SdkException<RawError>` — **Case B**
+
