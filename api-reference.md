@@ -2397,7 +2397,7 @@ catch (SdkException<GetInvoiceSettingsError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;InvoicingV2InvoiceSettingsPut200Response&gt; UpdateInvoiceSettings(ProductType? productType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;InvoicingV2InvoiceSettingsPut200Response&gt; UpdateInvoiceSettings(ProductType? productType, InvoiceSettingsRequest invoiceSettingsRequest, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
 
 <dl>
 <dd>
@@ -2420,7 +2420,7 @@ Allows you to customize the payment page, the checkout experience, email communi
 ```csharp
 try
 {
-    var response = await client.InvoiceSettings.UpdateInvoiceSettings(productType);
+    var response = await client.InvoiceSettings.UpdateInvoiceSettings(productType, invoiceSettingsRequest);
     // TODO: Handle 'response' of type InvoicingV2InvoiceSettingsPut200Response
 }
 catch (SdkException<UpdateInvoiceSettingsError> ex)
@@ -2443,6 +2443,7 @@ catch (SdkException<UpdateInvoiceSettingsError> ex)
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>productType</code> | <code>[ProductType?](Models/Enums/ProductType.cs)</code> | Allows you to choose which product type settings you want to update. |
+| <code>invoiceSettingsRequest</code> | <code>[InvoiceSettingsRequest](Models/InvoiceSettingsRequest.cs)</code> | - |
 
 </dd>
 </dl>
@@ -2469,7 +2470,7 @@ catch (SdkException<UpdateInvoiceSettingsError> ex)
 > Source: [Invoices](Api/Invoices.cs)
 
 <details>
-<summary><code>Task&lt;InvoicingV2InvoicesPost201Response&gt; CreateInvoice(RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;InvoicingV2InvoicesPost201Response&gt; CreateInvoice(CreateInvoiceRequest createInvoiceRequest, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
 
 <dl>
 <dd>
@@ -2493,7 +2494,7 @@ The availability of API features for a merchant can depend on the portfolio conf
 ```csharp
 try
 {
-    var response = await client.Invoices.CreateInvoice();
+    var response = await client.Invoices.CreateInvoice(createInvoiceRequest);
     // TODO: Handle 'response' of type InvoicingV2InvoicesPost201Response
 }
 catch (SdkException<CreateInvoiceError> ex)
@@ -2504,6 +2505,18 @@ catch (SdkException<CreateInvoiceError> ex)
     }
 }
 ```
+
+</dd>
+</dl>
+
+### Parameters
+
+<dl>
+<dd>
+
+| Name | Type | Description |
+| --- | --- | --- |
+| <code>createInvoiceRequest</code> | <code>[CreateInvoiceRequest](Models/CreateInvoiceRequest.cs)</code> | - |
 
 </dd>
 </dl>
@@ -2868,7 +2881,7 @@ catch (SdkException<PerformSendActionError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;InvoicingV2InvoicesPut200Response&gt; UpdateInvoice(string id, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;InvoicingV2InvoicesPut200Response&gt; UpdateInvoice(string id, UpdateInvoiceRequest updateInvoiceRequest, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
 
 <dl>
 <dd>
@@ -2891,7 +2904,7 @@ You can update all information except the invoice number till any payment is rec
 ```csharp
 try
 {
-    var response = await client.Invoices.UpdateInvoice(id);
+    var response = await client.Invoices.UpdateInvoice(id, updateInvoiceRequest);
     // TODO: Handle 'response' of type InvoicingV2InvoicesPut200Response
 }
 catch (SdkException<UpdateInvoiceError> ex)
@@ -2914,6 +2927,7 @@ catch (SdkException<UpdateInvoiceError> ex)
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>id</code> | <code>string</code> | The invoice number. |
+| <code>updateInvoiceRequest</code> | <code>[UpdateInvoiceRequest](Models/UpdateInvoiceRequest.cs)</code> | - |
 
 </dd>
 </dl>

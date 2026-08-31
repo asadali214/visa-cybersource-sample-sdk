@@ -8,13 +8,14 @@ Accessor: `client.Invoices` · Source: `Api/Invoices.cs` · 7 operations
 
 ### CreateInvoice
 
-- **Signature**: `CreateInvoice(RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `CreateInvoice(CreateInvoiceRequest createInvoiceRequest, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `InvoicingV2InvoicesPost201Response`
 - **Error**: `SdkException<CreateInvoiceError>` — **Case A (typed)**
 - **Error accessors**: `TryGetInvoicingV2InvoicesPost400Response1(out InvoicingV2InvoicesPost400Response1)` [400] · `TryGetInvoicingV2InvoicesPost404Response1(out InvoicingV2InvoicesPost404Response1)` [404] · `TryGetInvoicingV2InvoicesPost502Response1(out InvoicingV2InvoicesPost502Response1)` [502] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CreateInvoiceRequest` | `Models/CreateInvoiceRequest.cs` |
 | `InvoicingV2InvoicesPost201Response` | `Models/InvoicingV2InvoicesPost201Response.cs` |
 | `CreateInvoiceError` | `Errors/CreateInvoiceError.cs` |
 | `InvoicingV2InvoicesPost400Response1` | `Models/InvoicingV2InvoicesPost400Response1.cs` |
@@ -100,13 +101,14 @@ Accessor: `client.Invoices` · Source: `Api/Invoices.cs` · 7 operations
 
 ### UpdateInvoice
 
-- **Signature**: `UpdateInvoice(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `UpdateInvoice(string id, UpdateInvoiceRequest updateInvoiceRequest, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `InvoicingV2InvoicesPut200Response`
 - **Error**: `SdkException<UpdateInvoiceError>` — **Case A (typed)**
 - **Error accessors**: `TryGetInvoicingV2InvoicesPut400Response1(out InvoicingV2InvoicesPut400Response1)` [400] · `TryGetInvoicingV2InvoicesPut404Response1(out InvoicingV2InvoicesPut404Response1)` [404] · `TryGetInvoicingV2InvoicesPut502Response1(out InvoicingV2InvoicesPut502Response1)` [502] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `UpdateInvoiceRequest` | `Models/UpdateInvoiceRequest.cs` |
 | `InvoicingV2InvoicesPut200Response` | `Models/InvoicingV2InvoicesPut200Response.cs` |
 | `UpdateInvoiceError` | `Errors/UpdateInvoiceError.cs` |
 | `InvoicingV2InvoicesPut400Response1` | `Models/InvoicingV2InvoicesPut400Response1.cs` |

@@ -24,7 +24,7 @@ Accessor: `client.InvoiceSettings` · Source: `Api/InvoiceSettings.cs` · 2 oper
 
 ### UpdateInvoiceSettings
 
-- **Signature**: `UpdateInvoiceSettings(ProductType? productType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `UpdateInvoiceSettings(ProductType? productType, InvoiceSettingsRequest invoiceSettingsRequest, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `productType` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `productType` ← `productType`
 - **Returns**: `InvoicingV2InvoiceSettingsPut200Response`
@@ -34,6 +34,7 @@ Accessor: `client.InvoiceSettings` · Source: `Api/InvoiceSettings.cs` · 2 oper
 | Type | Source |
 | --- | --- |
 | `ProductType` | `Models/Enums/ProductType.cs` |
+| `InvoiceSettingsRequest` | `Models/InvoiceSettingsRequest.cs` |
 | `InvoicingV2InvoiceSettingsPut200Response` | `Models/InvoicingV2InvoiceSettingsPut200Response.cs` |
 | `UpdateInvoiceSettingsError` | `Errors/UpdateInvoiceSettingsError.cs` |
 | `InvoicingV2InvoiceSettingsPut400Response1` | `Models/InvoicingV2InvoiceSettingsPut400Response1.cs` |
