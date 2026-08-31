@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using CyberSourceMergedSpec.Core.Converters;
 using CyberSourceMergedSpec.Core.Models;
 
 namespace CyberSourceMergedSpec.Models;
@@ -14,6 +15,7 @@ public record Freight
     /// must also include the <b>totalAmount</b> field.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("amount")]
     [MaxLength(13)]
     public string? Amount { get; init; }
@@ -45,6 +47,7 @@ public record Freight
     /// </para>
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("taxRate")]
     [MaxLength(7)]
     public string? TaxRate { get; init; }

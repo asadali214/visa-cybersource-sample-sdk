@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using CyberSourceMergedSpec.Core.Converters;
 using CyberSourceMergedSpec.Core.Models;
 
 namespace CyberSourceMergedSpec.Models;
@@ -58,6 +59,7 @@ public record TransactionDetails
     /// </para>
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("amount")]
     [MaxLength(19)]
     public string? Amount { get; init; }

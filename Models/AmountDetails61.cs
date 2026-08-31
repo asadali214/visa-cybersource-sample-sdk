@@ -124,6 +124,7 @@ public record AmountDetails61
     /// Total discount amount applied to the order.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("discountAmount")]
     [MaxLength(15)]
     public string? DiscountAmount { get; init; }
@@ -132,6 +133,7 @@ public record AmountDetails61
     /// The total discount percentage applied to the order.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("discountPercent")]
     [MaxLength(7)]
     public string? DiscountPercent { get; init; }
@@ -140,6 +142,7 @@ public record AmountDetails61
     /// Sub-amount of the order.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("subAmount")]
     [MaxLength(25)]
     public string? SubAmount { get; init; }
@@ -148,6 +151,7 @@ public record AmountDetails61
     /// The minimum partial amount required to pay the invoice.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("minimumPartialAmount")]
     public string? MinimumPartialAmount { get; init; }
 

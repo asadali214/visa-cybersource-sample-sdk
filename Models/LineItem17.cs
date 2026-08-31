@@ -98,6 +98,7 @@ public record LineItem17
     /// Discount applied to the item.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("discountAmount")]
     [MaxLength(13)]
     public string? DiscountAmount { get; init; }
@@ -109,6 +110,7 @@ public record LineItem17
     /// </para>
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("discountPercent")]
     [MaxLength(6)]
     public string? DiscountPercent { get; init; }
@@ -143,6 +145,7 @@ public record LineItem17
     /// </para>
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("taxAmount")]
     [MaxLength(15)]
     public string? TaxAmount { get; init; }
@@ -157,6 +160,7 @@ public record LineItem17
     /// </para>
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("taxRate")]
     [MaxLength(7)]
     public string? TaxRate { get; init; }
@@ -172,6 +176,7 @@ public record LineItem17
     /// </para>
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonConverter(typeof(NumericStringConverter))]
     [JsonPropertyName("totalAmount")]
     [MaxLength(13)]
     public string? TotalAmount { get; init; }
